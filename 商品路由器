@@ -1,0 +1,95 @@
+const  express=require('express');
+const pool=require('../pool.js');
+//创建路由器
+const  router=express.Router();
+//1.商品增加
+router.get('/reg',function(req,res){
+	var obj=req.query;
+	console.log(obj);
+	var n=400;
+	//检索是否为空
+	for(var key in obj){
+		n++;
+		if(!obj[key]){
+			res.send({code:n,msg:key+' required'});
+			return;
+		};
+	};
+	pool.query('INSERT INTO xz_laptop SET ?',[obj],function(err,result){
+		if(err) throw err;
+		if(result.affectedRows>0) {
+			res.send({code:200,msg:'ins suc'});
+			return;
+		}
+		else res.send({code:301,msg:'ins err'});
+	});
+});
+//2.商品修改
+router.get('/update',function(req,res){
+	var obj=req.query;
+	console.log(obj);
+	var n=400;
+	for(var key in obj){
+		n++;
+		if(!obj[key]){
+			res.send({code:n,msg:key+' required'});
+			return;
+		}
+	};
+	pool.query('UPDATE xz_laptop SET price=? WHERE lname=?',
+	[obj.price,obj.lname],function(err,result){
+		if(err) throw err;
+		if(result.affectedRows>0) res.send({code:200,msg:'update suc'});
+		else res.send({code:301,msg:'update err'});
+	});
+	
+});
+//3.商品删除
+router.get('/delete',function(req,res){
+	var obj=req.query;
+	console.log(obj);
+	if(!obj.lid){
+		res.send({code:401,msg:'lid required'});
+		return;
+	}
+	pool.query('DELETE FROM xz_laptop WHERE lid=?',[obj.lid],function(err,result){
+		if(err) throw err;
+		if(result.affectedRows>0) res.send({code:200,msg:'delete suc'});
+		else res.send({code:301,msg:'delete err'});
+	});
+});
+
+//4.商品检索
+router.get('/detail',function(req,res){
+	var obj=req.query;
+	if(!obj.lid){
+		res.send({code:401,msg:'lid required'});
+		return;
+	}
+	pool.query('SELECT * FROM xz_laptop WHERE lid=?',[obj.lid],function(err,result){
+		if(err) throw err;
+		if(result.length>0) res.send(result);
+		else res.send({code:301,msg:'detail err'});
+	});
+});
+
+
+//5.商品列表
+router.get('/list',function(req,res){
+	var obj=req.query;
+	if(!obj.pno) obj.pno=1;
+	if(!obj.count) obj.count=3;
+
+	obj.pno=parseInt(obj.pno);
+	obj.count=parseInt(obj.count);
+	var start=(obj.pno-1)*obj.count;
+	pool.query('SELECT * FROM xz_laptop LIMIT ?,?',[start,obj.count],function(err,result){
+		if(err) throw err;
+		if(result.length>0) res.send(result);
+		else res.send({code:301,msg:'list err'});
+	});
+});
+
+
+//导出模块
+module.exports=router;
