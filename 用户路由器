@@ -1,0 +1,134 @@
+const express=require('express');
+const pool=require('../pool.js');
+//创建路由对象
+var router=express.Router();
+//创建路由
+//1.用户注册
+router.get('/reg',function(req,res){
+	//获取get请求的数据
+	var obj=req.query;
+	//检测值是否为空
+	//检测名字是否为空
+	var n=400;
+	//遍历对象，检测是否为空
+	for(var key in obj){
+		n++;
+	if(!obj[key]){
+		res.send({code:n,msg:key+' required'});
+		return;
+		}
+	}
+	//执行sql语句
+	//往数据库增加
+	pool.query('INSERT INTO xz_user SET ?',[obj],function(err,result){
+		if(err) throw err;
+		//判断是否注册成功
+		if(result.affectedRows>0){
+			res.send({code:200,msg:'reg suc'});
+		}
+	});		
+});
+//2.用户登陆
+router.post('/login',function(req,res){
+	var obj=req.body;
+	var n=400;
+	for(var key in obj){
+		n++;
+		if(!obj[key]){
+		res.send({code:n,msg:key+' required'});
+		return;
+		};
+	};
+		//执行sql语句
+		pool.query('SELECT * FROM xz_user WHERE uname=? AND upwd=?',
+		[obj.uname,obj.upwd],function(err,result){
+			if(err) throw err;
+			if(result.length>0){
+				res.send({code:200,msg:'reg suc'});
+				}
+			else {
+				res.send({code:301,msg:'login err'});
+			}
+		});	
+});
+//3.修改用户
+router.get('/update',function(req,res){
+	//获取get请求数据
+	//验证数据是否为空
+	//执行SQL语句,修改数据
+	var obj=req.query;
+	var n=400;
+	//遍历对象属性，获取所有的属性
+	for(var key in obj){
+		n++;
+		if(!obj[key]){
+		res.send({code:n,msg:key+' required'});
+		return;
+		}
+	}
+	//执行SQL语句，修改数据
+	pool.query('UPDATE xz_user SET phone=?,email=?,user_name=?,gender=? WHERE uid=?',
+	[obj.phone,obj.email,obj.user_name,obj.gender,obj.uid],function(err,result){
+		if(err) throw err;
+		//判断是否修改成功
+		if(result.affectedRows>0)
+			res.send({code:200,msg:'update suc'});
+		else res.send({code:301,msg:'update err'});
+	});
+});
+//4.检索用户
+router.get('/detail',function(req,res){
+	var obj=req.query;
+    if(!obj.uid){
+		res.send({code:401,msg:'uid required'});
+		return;
+	}
+	pool.query('SELECT * FROM xz_user WHERE uid=?',[obj.uid],function(err,result){
+		if(err) throw err;
+		if(result.length<1){
+			res.send('查无此人');
+			return;
+		}
+		res.send(result);
+	});
+});
+//5.用户列表
+router.get('/list',function(req,res){
+	//获取get请求的数据
+	var obj=req.query;
+	if(!obj.pno){
+		obj.pno=1;
+	};
+	if(!obj.count){
+		obj.count=3;
+	};
+	//将传递的值转为整形
+	obj.pno=parseInt(obj.pno);
+	obj.count=parseInt(obj.count);
+	var start=(obj.pno-1)*obj.count;
+	pool.query('SELECT * FROM xz_user LIMIT ?,?',[start,obj.count],function(err,result){
+		if(err) throw err;
+		res.send(result);
+	
+	});
+});
+//6.用户删除
+router.get('/delete',function(req,res){
+	var obj=req.query;
+	if(!obj.uid){
+		res.send({code:301,msg:'uid required'});
+		return;
+	}
+	pool.query('DELETE FROM xz_user WHERE uid=?',[obj.uid],function(err,result){
+		if(err) throw err;
+		if(result.affectedRows>0) res.send({code:200,msg:'delete suc'});
+		else res.send({code:301,msg:'delete err'});
+	});
+});
+
+
+
+
+
+//导出路由器对象
+module.exports=router;
