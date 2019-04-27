@@ -1,0 +1,6 @@
+<h2>商品增加</h2>
+<form action="/product/reg" method='get'>
+商品名称：<input type="text" name='lname'><br>
+商品价格：<input type="text" name='price'><br>
+<input type="submit">
+</form>
