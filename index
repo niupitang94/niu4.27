@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>index.html</title>
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="css/comm.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+  <iframe class="my_header" src="header.html" scrolling="no" frameborder="0"></iframe> 
+  <div class="container">
+    <!-- 轮播图 开始-->
+    <!-- 1焦点轮播图 -->
+    <div id="demo" class="carousel my-3" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="w-100" src="../img/index/banner1.png" alt="">
+        </div>
+        <div class="carousel-item">
+          <img class="w-100" src="../img/index/banner2.png" alt="">
+        </div>
+        <div class="carousel-item">
+          <img class="w-100" src="../img/index/banner3.png" alt="">
+        </div>
+        <div class="carousel-item">
+          <img class="w-100" src="../img/index/banner4.png" alt="">
+        </div>
+      </div>
+      <!-- 左右箭头 -->
+      <a data-slide="prev" class="carousel-control-prev" href="#demo">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a data-slide="next" class="carousel-control-next" href="#demo">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+      <!-- 四个点 -->
+      <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+        <li data-target="#demo" data-slide-to="3"></li>
+      </ul>
+    </div>
+    <!-- 轮播图 结束 -->
+    <!--首页推荐开始  -->
+    <h3 class="border-bottom py-2">
+      <img class="mr-4" src="../img/index/computer_icon.png">
+      首页推荐 /1F
+    </h3>
+    <!-- 首页推荐结束 -->
+    <!-- 主体广告图开始 -->
+    <div class="row mx-0 my-3">
+      <div class="col-lg-7 p-0">
+        <div class="my_top mr-lg-2 mr-sm-0 mb-2 bg_color">
+          <table></table>
+          <div class="card border-0 w-50 mt-5 ml-5">
+            <h3>Apple MacBook Air系列</h3>
+            <h6 class="my_small text-muted">酷睿双核i5处理器|256GB SSD|8GB内存|英特尔HD显卡620含共享显卡内存</h6>
+            <span class="text-primary">￥6988.00</span>
+            <a class="btn btn-primary w-50 mt-2" href="#">查看详情</a>
+          </div>
+          <img class="float-right my_img_position" src="../img/index/study_computer_img1.png">
+        </div>
+      </div>
+      <div class="col-lg-5 p-0">
+        <div class="my_top mb-2 bg_color">
+            <table></table>
+            <div class="card border-0 w-50 mt-5 ml-5">
+              <h3>小米Air 金属超轻薄</h3>
+              <h6 class="my_small text-muted">酷睿双核i5处理器|512GB SSD|2GB内存|英特尔HD独立显卡</h6>
+              <span class="text-primary">￥3488.00</span>
+              <a class="btn btn-primary w-50 mt-2" href="#">查看详情</a>
+            </div>
+            <img class="float-right my_img2_position" src="../img/index/study_computer_img2.png">
+        </div>
+      </div>
+      <div class="col-lg-5 px-0">
+        <div class="my_bottom mr-lg-2 mr-sm-0 mb-sm-2
+        mb-lg-0 bg_color">
+          <table></table>
+            <div class="card border-0 w-50 mt-3 ml-5">
+                <h3>小米Air 金属超轻薄</h3>
+                <h6 class="my_small text-muted">酷睿双核i5处理器|512GB SSD|2GB内存|英特尔HD独立显卡</h6>
+                <span class="text-primary">￥3488.00</span>
+                <a class="btn btn-primary w-50 mt-2" href="#">查看详情</a>
+              </div>
+              <img class="float-right my_img3_position" src="../img/index/study_computer_img3.png">
+        </div>
+      </div>
+      <div class="col-lg-7 p-0">
+        <div class="row mx-0">
+          <div class="col-4 px-0">
+            <div class="my_bottom mr-2 bg_color">
+              <img class="my_img4_position" src="../img/index/study_computer_img4.png">
+              <div class="card border-0 text-center">
+                <h6 class="my_small text-muted">华硕RX310 金属超极本</h6>
+                <span class="text-primary">￥4966.00</span>
+                  <a class="btn btn-primary w-50 my_view" href="#">查看详情</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 px-0">
+            <div class="my_bottom mr-2 bg_color">
+                <img class="my_img4_position" src="../img/index/study_computer_img5.png">
+                <div class="card border-0 text-center">
+                  <h6 class="my_small text-muted">华硕RX310 金属超极本</h6>
+                  <span class="text-primary">￥4966.00</span>
+                    <a class="btn btn-primary w-50 my_view" href="#">查看详情</a>
+                </div>
+            </div>
+          </div>
+          <div class="col-4 px-0">
+            <div class="my_bottom bg_color">
+                <img class="my_img4_position" src="../img/index/study_computer_img3.png">
+                <div class="card border-0 text-center">
+                  <h6 class="my_small text-muted">华硕RX310 金属超极本</h6>
+                  <span class="text-primary">￥4966.00</span>
+                    <a class="btn btn-primary w-50 my_view" href="#">查看详情</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 主体广告图结束 -->
+  </div>
+  <iframe class="my_footer" src="footer.html" scrolling="no" frameborder="0"></iframe>
+</body>
+</html>
